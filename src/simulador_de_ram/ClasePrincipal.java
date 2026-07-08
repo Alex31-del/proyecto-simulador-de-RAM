@@ -3,18 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package simulador_de_ram;
+ import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
-/**
- *
- * @author user
- */
-public class Simulador_de_RAM {
+public class ClasePrincipal{
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        
     }
     
 }
