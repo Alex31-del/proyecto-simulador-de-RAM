@@ -34,6 +34,15 @@ public class BloqueMemoria {
         return proceso;
     }
     
+    public void asignarProceso(Proceso p){
+        proceso = p;
+        ocupado = true;
+    }
+    
+    public void liberarProceso(){
+        proceso = null;
+        ocupado = false;
+    }
     
             
 }
