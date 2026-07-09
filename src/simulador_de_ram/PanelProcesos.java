@@ -13,6 +13,7 @@ public class PanelProcesos extends JPanel{
    private JComboBox<String> cAlgoritmo;
    private JTable tProceso;
    private DefaultTableModel modelo;
+   private MemoriaRAM memoria;
    
    
 }
