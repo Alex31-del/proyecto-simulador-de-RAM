@@ -34,6 +34,14 @@ public class BloqueMemoria {
         return proceso;
     }
     
+    public void setInicio(int inicio) {
+        this.inicio = inicio;
+    }
+
+    public void setTamano(int tamano) {
+        this.tamano = tamano;
+    }
+    
     public void asignarProceso(Proceso p){
         proceso = p;
         ocupado = true;
@@ -43,6 +51,7 @@ public class BloqueMemoria {
         proceso = null;
         ocupado = false;
     }
+
     
             
 }

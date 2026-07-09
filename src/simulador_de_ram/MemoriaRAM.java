@@ -29,5 +29,19 @@ public class MemoriaRAM {
         return bloques;
     }
     
+    public void dividirMemoria(BloqueMemoria bloque, Proceso p){
+        
+    }
     
+    public void firstFit(Proceso p){
+        
+    }
+    
+    public void bestFit(Proceso p){
+        
+    }
+    
+    public void worstFit(Proceso p){
+        
+    }
 }
