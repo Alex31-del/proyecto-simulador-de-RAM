@@ -1,7 +1,6 @@
 package simulador_de_ram;
 
 /**
- *
  * @author CRISTHIAN
  */
 
