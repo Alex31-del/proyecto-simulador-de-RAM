@@ -17,6 +17,22 @@ public class BloqueMemoria {
         ocupado = false;
         proceso = null;
     }
+
+    public int getInicio() {
+        return inicio;
+    }
+
+    public int getTamano() {
+        return tamano;
+    }
+
+    public boolean isOcupado() {
+        return ocupado;
+    }
+
+    public Proceso getProceso() {
+        return proceso;
+    }
     
     
             
