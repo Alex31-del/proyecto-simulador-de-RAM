@@ -6,8 +6,10 @@ package simulador_de_ram;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.*;
 
-public class PanelProcesos extends JPanel{
+
+public class PanelProcesos extends JPanel implements ActionListener{
     
    private JLabel lNombre, lMemoria,  lAlgoritmo;
    private JTextField tNombre, tMemoria;
@@ -38,7 +40,9 @@ public class PanelProcesos extends JPanel{
         cAlgoritmo.addItem("Best Fist");
         
         bCrear = new JButton("Crear");
+        bCrear.addActionListener(this);
         bEliminar = new JButton("Eliminar");
+        bEliminar.addActionListener(this);
         
         datos.add(lNombre);
         datos.add(tNombre);
@@ -53,9 +57,69 @@ public class PanelProcesos extends JPanel{
         datos.add(bEliminar);
        
         add(datos, BorderLayout.NORTH);
+        modelo  = new DefaultTableModel();
+        modelo.addColumn("Proceso");
+        modelo.addColumn("Memoria");
+        modelo.addColumn("Estado");
         
+        tProceso = new JTable(modelo);
+        
+        add(new JScrollPane(tProceso), BorderLayout.CENTER);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+       if(e.getSource()==bCrear){
+           crearProceso();
+           
+       }
+       if(e.getSource()==bEliminar){
+           eliminarProceso();
+       }
     }
    
+        private void crearProceso() {
+
+            try {
+
+               String nombre = tNombre.getText().trim();
+              int memoriaProceso = Integer.parseInt(tMemoria.getText());
+
+                 if(nombre.isEmpty()){
+                         JOptionPane.showMessageDialog(this, "Ingrese el nombre del proceso");
+                 return;
+                 }
+
+             Proceso p = new Proceso(nombre, memoriaProceso);
+
+             String algoritmo = cAlgoritmo.getSelectedItem().toString();
+
+             switch (algoritmo) {
+
+                    case "First Fit":
+                memoria.firstFit(p);
+                 break;
+
+                case "Best Fit":
+                memoria.bestFit(p);
+                    break;
+
+                 case "Worst Fit":
+                    memoria.worstFit(p);
+                 break;
+                }
+
+                actualizarTabla();
+                limpiarCampos();
+
+            } catch (NumberFormatException e) {
+
+                 JOptionPane.showMessageDialog(this,"La memoria debe ser un número.");
+            }       
+        }
+
+
+
    
    
 }
