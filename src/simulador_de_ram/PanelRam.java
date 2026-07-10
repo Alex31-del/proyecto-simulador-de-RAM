@@ -10,9 +10,9 @@ import javax.swing.JPanel;
  */
 public class PanelRam extends JPanel{
     
-    private MemoriaRam memoria;
+    private MemoriaRAM memoria;
     
-    public PanelRam(MemoriaRam memoria){
+    public PanelRam(MemoriaRAM memoria){
         this.memoria=memoria;
         repaint();
         
@@ -20,11 +20,11 @@ public class PanelRam extends JPanel{
         setBackground(Color.WHITE);
     }
     
-    public MemoriaRam getMemoria(){
+    public MemoriaRAM getMemoria(){
         return memoria;
     }
     
-    public void setMemoria(MemoriaRam memoria){
+    public void setMemoria(MemoriaRAM memoria){
         this.memoria=memoria;
         repaint();
     }
