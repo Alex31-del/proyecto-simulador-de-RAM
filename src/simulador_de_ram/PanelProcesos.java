@@ -117,9 +117,40 @@ public class PanelProcesos extends JPanel implements ActionListener{
                  JOptionPane.showMessageDialog(this,"La memoria debe ser un número.");
             }       
         }
+        
+        private void eliminarProceso(){
+            int fila = tProceso.getSelectedRow();
+            
+            if(fila==-1){
+                JOptionPane.showMessageDialog(this, "Seleccione un proceso.");
+                return;
+                
+            }
+            
+            String nombre = modelo.getValueAt(fila, 0).toString();
+            memoria.liberarProceso(nombre);
+            actualizarTabla();
+        }
 
+        private void actualizarTabla(){
+            modelo.setRowCount(0);
+            for(BloqueMemoria b: memoria.getBloques()){
+                Proceso p= b.getProceso();
+                modelo.addRow(new Object[]{
+                    p.getNombre(),
+                    p.getMemoria()+" MB",
+                    "Activo"
+                });
+            }
+        }
 
-
-   
+        private void limpiarCampos(){
+            tNombre.setText("");
+            tMemoria.setText("");
+            
+            tNombre.requestFocus();
+            
+            
+        }
    
 }

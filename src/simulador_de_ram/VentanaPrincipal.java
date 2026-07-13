@@ -9,20 +9,21 @@ import java.awt.*;
 
 public class VentanaPrincipal extends JFrame {
     private MemoriaRAM  memoria;
-    private PanelProcesos panelProcesos;
-    
+    private PanelProcesos pnlProcesos;
+    private PanelRam pnlRam;
 
     public VentanaPrincipal() {
         
         memoria = new MemoriaRAM(1024);
-        panelProcesos = new PanelProcesos(memoria);
+        pnlProcesos = new PanelProcesos(memoria);
+        pnlRam = new PanelRam(memoria);
         
         setTitle("Simulador de Memoria RAM");
 
         setLayout(new BorderLayout());
 
-        add(panelProcesos, BorderLayout.WEST);
-        
+        add(pnlProcesos, BorderLayout.WEST);
+        add(pnlRam, BorderLayout.CENTER);
 
         setSize(1000,600);
 
