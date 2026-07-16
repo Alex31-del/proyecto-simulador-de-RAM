@@ -1,7 +1,9 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+ Alexander
+*/
+  
 package simulador_de_ram;
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +28,7 @@ public class VentanaPrincipal extends JFrame {
         add(pnlProcesos, BorderLayout.WEST);
         add(pnlRam, BorderLayout.CENTER);
 
-        setSize(1000,600);
+        setSize(690,600);
 
         setLocationRelativeTo(null);
 

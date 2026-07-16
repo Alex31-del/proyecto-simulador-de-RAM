@@ -28,9 +28,7 @@ public class MemoriaRAM {
         return bloques;
     }
     
-    public void dividirMemoria(BloqueMemoria bloque, Proceso p){
-        
-    }
+    
     
     public void dividirMemoria(BloqueMemoria bloque, Proceso p){
         

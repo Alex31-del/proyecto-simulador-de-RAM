@@ -7,7 +7,7 @@ package simulador_de_ram;
 
 /**
  *
- * @author user
+ * @author ALEXANDER
  */
 public class Proceso {
     private String nombre;
