@@ -32,16 +32,83 @@ public class MemoriaRAM {
         
     }
     
-    public void firstFit(Proceso p){
+    public void dividirMemoria(BloqueMemoria bloque, Proceso p){
+        
+        if(bloque.getTamano() == p.getMemoria()){
+            bloque.asignarProceso(p);
+            return;
+        }
+        
+        int restante = bloque.getTamano() - p.getMemoria();
+        
+        BloqueMemoria nuevo = new BloqueMemoria(bloque.getInicio() + p.getMemoria(), restante);
+        
+        bloque.setTamano(p.getMemoria());
+        bloque.asignarProceso(p);
+        
+        int indice = bloques.indexOf(bloque);
+        
+        bloques.add(indice + 1, nuevo);
         
     }
     
-    public void bestFit(Proceso p){
+    public boolean firstFit(Proceso p){
         
+        for (BloqueMemoria bloque: bloques){
+            
+            if (!bloque.isOcupado() && bloque.getTamano() >= p.getMemoria()){
+                
+                dividirMemoria(bloque, p);
+                
+                return true;
+            }
+        }
+        
+        return false;
     }
     
-    public void worstFit(Proceso p){
+    public boolean bestFit(Proceso p){
         
+        BloqueMemoria mejor = null;
+        
+        for (BloqueMemoria bloque: bloques){
+            
+            if(!bloque.isOcupado() && bloque.getTamano() >= p.getMemoria()){
+               
+                if(mejor == null || bloque.getTamano() < mejor.getTamano()){
+                    mejor = bloque;
+                }           
+            }
+        }
+        
+        if(mejor != null){
+            dividirMemoria(mejor,p);
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public boolean worstFit(Proceso p){
+        
+        BloqueMemoria mayor = null;
+        
+        for (BloqueMemoria bloque: bloques){
+            
+            if(!bloque.isOcupado() && bloque.getTamano() >= p.getMemoria()){
+               
+                if(mayor == null || bloque.getTamano() > mayor.getTamano()){
+                    mayor = bloque;
+                }           
+            }
+        }
+        
+        if(mayor != null){
+            dividirMemoria(mayor,p);
+            return true;
+        }
+        
+        return false;
     }
     public void liberarProceso(String nombre) {
 
@@ -63,6 +130,7 @@ public class MemoriaRAM {
        }
 
     }
+    
     public void fusionarBloques() {
 
          for (int i = 0; i < bloques.size() - 1; i++) {
