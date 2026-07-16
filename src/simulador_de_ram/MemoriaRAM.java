@@ -64,50 +64,68 @@ public class MemoriaRAM {
         
         return false;
     }
+
+    public void firstFit(Proceso p){
+        
+         for(int i=0;i<bloques.size();i++){
+
+            BloqueMemoria bloque = bloques.get(i);
+
+            if(!bloque.isOcupado() && bloque.getTamano()>=p.getMemoria()){
+
+                dividirMemoria(bloque,p);
+
+                return;
+            }
+
+        }
+    }
     
-    public boolean bestFit(Proceso p){
+    public void bestFit(Proceso p){
         
-        BloqueMemoria mejor = null;
+       BloqueMemoria mejor = null;
         
-        for (BloqueMemoria bloque: bloques){
-            
+        for(int i = 0; i < bloques.size(); i++){
+
+            BloqueMemoria bloque = bloques.get(i);
+
             if(!bloque.isOcupado() && bloque.getTamano() >= p.getMemoria()){
-               
+
                 if(mejor == null || bloque.getTamano() < mejor.getTamano()){
                     mejor = bloque;
-                }           
+                }
+
             }
+
         }
-        
+
         if(mejor != null){
-            dividirMemoria(mejor,p);
-            return true;
+            dividirMemoria(mejor, p);
         }
-        
-        return false;
     }
     
     public boolean worstFit(Proceso p){
         
         BloqueMemoria mayor = null;
         
-        for (BloqueMemoria bloque: bloques){
-            
+        for(int i = 0; i < bloques.size(); i++){
+
+            BloqueMemoria bloque = bloques.get(i);
+
             if(!bloque.isOcupado() && bloque.getTamano() >= p.getMemoria()){
-               
+
                 if(mayor == null || bloque.getTamano() > mayor.getTamano()){
                     mayor = bloque;
-                }           
+                }
             }
         }
-        
+
         if(mayor != null){
-            dividirMemoria(mayor,p);
-            return true;
+            dividirMemoria(mayor, p);
         }
-        
-        return false;
     }
+
+    
     public void liberarProceso(String nombre) {
 
         for (BloqueMemoria bloque : bloques) {
