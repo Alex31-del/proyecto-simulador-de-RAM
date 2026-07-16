@@ -18,11 +18,12 @@ public class PanelProcesos extends JPanel implements ActionListener{
    private JTable tProceso;
    private DefaultTableModel modelo;
    private MemoriaRAM memoria;
+   private PanelRam panelRam;
 
-    public PanelProcesos(MemoriaRAM memoria) {
+    public PanelProcesos(MemoriaRAM memoria, PanelRam panelRam) {
         
         this.memoria = memoria;
-        
+        this.panelRam = panelRam;
         setLayout(new BorderLayout());
         
         JPanel datos = new JPanel(new GridLayout(4,2));
@@ -36,8 +37,8 @@ public class PanelProcesos extends JPanel implements ActionListener{
         
         cAlgoritmo =new JComboBox<>();
         cAlgoritmo.addItem("First Fit");
-        cAlgoritmo.addItem("Best Fist");
-        cAlgoritmo.addItem("Best Fist");
+        cAlgoritmo.addItem("Best Fit");
+        cAlgoritmo.addItem("Worst Fit");
         
         bCrear = new JButton("Crear");
         bCrear.addActionListener(this);
@@ -115,7 +116,12 @@ public class PanelProcesos extends JPanel implements ActionListener{
             } catch (NumberFormatException e) {
 
                  JOptionPane.showMessageDialog(this,"La memoria debe ser un número.");
-            }       
+            }  
+            
+            actualizarTabla();
+            limpiarCampos();
+            System.out.println("Llamando a repaint...");
+            panelRam.repaint();
         }
         
         private void eliminarProceso(){
@@ -130,19 +136,22 @@ public class PanelProcesos extends JPanel implements ActionListener{
             String nombre = modelo.getValueAt(fila, 0).toString();
             memoria.liberarProceso(nombre);
             actualizarTabla();
+            panelRam.repaint();
         }
 
         private void actualizarTabla(){
-            modelo.setRowCount(0);
-            for(BloqueMemoria b: memoria.getBloques()){
-                Proceso p= b.getProceso();
-                modelo.addRow(new Object[]{
-                    p.getNombre(),
-                    p.getMemoria()+" MB",
-                    "Activo"
-                });
-            }
-        }
+    modelo.setRowCount(0);
+    for(BloqueMemoria b: memoria.getBloques()){
+        if(!b.isOcupado()) continue;          
+        
+        Proceso p= b.getProceso();
+        modelo.addRow(new Object[]{
+            p.getNombre(),
+            p.getMemoria()+" MB",
+            "Activo"
+        });
+    }
+}
 
         private void limpiarCampos(){
             tNombre.setText("");

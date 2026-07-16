@@ -45,7 +45,65 @@ public class PanelRam extends JPanel{
         //Ram gráfica
         g.setColor(Color.BLACK);
         g.drawRect(MARGEN_X, MARGEN_Y, ANCHO_RAM, ALTO_RAM);
+         int y = MARGEN_Y;
+
+        for(BloqueMemoria bloque : memoria.getBloques()){
+
+            int altoBloque =(bloque.getTamano()*ALTO_RAM)
+                    / memoria.getMemoriaTotal();
+                    
+
+            if(bloque.isOcupado()){
+
+                g.setColor(new Color(120,180,255));
+
+            }else{
+
+                g.setColor(Color.LIGHT_GRAY);
+
+            }
+
+            g.fillRect(
+                    MARGEN_X,
+                    y,
+                    ANCHO_RAM,
+                    altoBloque
+            );
+
+            g.setColor(Color.BLACK);
+            g.drawRect(
+                    MARGEN_X,
+                    y,
+                    ANCHO_RAM,
+                    altoBloque
+            );
+
+            if(bloque.isOcupado()){
+
+                g.drawString(
+                        bloque.getProceso().getNombre()
+                        +" ("+
+                        bloque.getTamano()+" MB)",
+                        MARGEN_X+5,
+                        y+15
+                );
+
+            }else{
+
+                g.drawString(
+                        "Libre ("+
+                        bloque.getTamano()+" MB)",
+                        MARGEN_X+5,
+                        y+15
+                );
+
+            }
+
+            y += altoBloque;
+
         
-        
+    
+        }
+
     }
 }

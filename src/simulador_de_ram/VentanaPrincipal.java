@@ -15,8 +15,9 @@ public class VentanaPrincipal extends JFrame {
     public VentanaPrincipal() {
         
         memoria = new MemoriaRAM(1024);
-        pnlProcesos = new PanelProcesos(memoria);
         pnlRam = new PanelRam(memoria);
+        pnlProcesos = new PanelProcesos(memoria, pnlRam);
+
         
         setTitle("Simulador de Memoria RAM");
 
