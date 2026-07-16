@@ -49,21 +49,7 @@ public class MemoriaRAM {
         bloques.add(indice + 1, nuevo);
         
     }
-    
-    public boolean firstFit(Proceso p){
-        
-        for (BloqueMemoria bloque: bloques){
-            
-            if (!bloque.isOcupado() && bloque.getTamano() >= p.getMemoria()){
-                
-                dividirMemoria(bloque, p);
-                
-                return true;
-            }
-        }
-        
-        return false;
-    }
+
 
     public void firstFit(Proceso p){
         
